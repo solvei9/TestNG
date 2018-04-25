@@ -6,6 +6,9 @@
                 <include name="positive"></include>
                 <include name="negative"></include>
             </run>
+            <dependencies>
+                <group name="negative" depends-on="positive"></group>
+            </dependencies>
         </groups>
         <packages>
             <package name="lesson1" />

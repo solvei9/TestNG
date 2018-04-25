@@ -51,7 +51,7 @@ public class Task03Test {
         file.createNewFile();
     }
 
-    @AfterMethod
+    @AfterMethod (alwaysRun = true)
     public void tearDown() throws IOException {
         if (!(file==null)) {
             file.delete();
