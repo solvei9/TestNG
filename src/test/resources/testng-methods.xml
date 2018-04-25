@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="1" >
+    <test name="Test1"   >
+        <classes>
+            <class name="lesson1.Task03Test">
+                <methods>
+                    <include name="emptyFileCreateTest"></include>
+                    <include name="sameFileCreateTest"></include>
+                    <include name="anotherFileCreateTest"></include>
+                    <include name="nullFileCreateTest"></include>
+                    <include name="invalidNameFileCreateTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

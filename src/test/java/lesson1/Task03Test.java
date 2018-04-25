@@ -1,8 +1,6 @@
 package lesson1;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,38 +13,39 @@ public class Task03Test {
     private File file;
     private File file1;
 
-    @BeforeMethod
+    @BeforeMethod(groups = "positive")
     public void setUp() throws IOException {
         tmpFolder = Files.createTempDirectory("TestNG");
     }
 
-    @Test
+    @Test(groups = "positive")
     public void emptyFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
         file.createNewFile();
     }
 
-    @Test
+    @Test(groups = "positive")
     public void sameFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
         file.createNewFile();
         file.createNewFile();
     }
 
-    @Test
+    @Test(groups = "positive")
     public void anotherFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
+        System.out.println(tmpFolder + "\\file.txt");
         file.createNewFile();
         file1 = new File(tmpFolder + "\\file1.txt");
         file1.createNewFile();
     }
 
-    @Test
+    @Test(groups = "negative")
     public void nullFileCreateTest() throws IOException {
         file.createNewFile();
     }
 
-    @Test
+    @Test(groups = "negative")
     public void invalidNameFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\*");
         file.createNewFile();
