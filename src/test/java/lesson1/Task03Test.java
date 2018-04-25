@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -45,10 +46,20 @@ public class Task03Test {
         file.createNewFile();
     }
 
+    @Test
+    public void invalidNameFileCreateTest() throws IOException {
+        file = new File(tmpFolder + "\\*");
+        file.createNewFile();
+    }
+
     @AfterMethod
     public void tearDown() throws IOException {
-        file.delete();
-        file1.delete();
-        Files.deleteIfExists(tmpFolder);
+        if (!(file==null)) {
+            file.delete();
+        }
+        if (!(file1==null)) {
+            file1.delete();
+        }
+        Files.delete(tmpFolder);
     }
 }
