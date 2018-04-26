@@ -23,34 +23,25 @@ public class Task05Test {
 
     @Test(groups = "positive")
     public void emptyFileCreateTest() throws IOException {
-        try {
-            file = new File(tmpFolder + "\\file.txt");
-            file.createNewFile();
-        }
-        catch (IOException e) {}
+        file = new File(tmpFolder + "\\file.txt");
+        file.createNewFile();
         Assert.assertTrue(file.exists());
     }
 
     @Test(groups = "positive")
     public void sameFileCreateTest() throws IOException {
-        try {
-            file = new File(tmpFolder + "\\file.txt");
-            file.createNewFile();
-            file.createNewFile();
-        }
-        catch (IOException e) {}
+        file = new File(tmpFolder + "\\file.txt");
+        file.createNewFile();
+        file.createNewFile();
         Assert.assertTrue(file.exists());
     }
 
     @Test(groups = "positive")
     public void anotherFileCreateTest() throws IOException {
-        try {
-            file = new File(tmpFolder + "\\file.txt");
-            file.createNewFile();
-            file1 = new File(tmpFolder + "\\file1.txt");
-            file1.createNewFile();
-        }
-        catch (IOException e) {}
+        file = new File(tmpFolder + "\\file.txt");
+        file.createNewFile();
+        file1 = new File(tmpFolder + "\\file1.txt");
+        file1.createNewFile();
         SoftAssert s = new SoftAssert();
         s.assertTrue(file.exists());
         s.assertTrue(file1.exists());
@@ -58,12 +49,14 @@ public class Task05Test {
     }
 
     @Test(groups = "negative")
-    public void nullFileCreateTest(){
+    public void nullFileCreateTest() throws IOException{
         try {
+            file = null;
             file.createNewFile();
         }
-        catch (IOException e) {}
-        Assert.assertFalse(file.exists());
+        catch (Exception e) {
+            Assert.assertEquals(e.getClass().toString(), "class java.lang.NullPointerException");
+        }
     }
 
     @Test(groups = "negative")
@@ -72,8 +65,10 @@ public class Task05Test {
             file = new File(tmpFolder + "\\*");
             file.createNewFile();
         }
-        catch (IOException e) {}
-        Assert.assertFalse(file.exists());
+        catch (IOException e) {
+            Assert.assertEquals(e.getMessage(), "Синтаксическая ошибка в имени файла, имени папки или метке тома");
+            Assert.assertFalse(file.exists());
+        }
     }
 
     @AfterMethod(alwaysRun = true)

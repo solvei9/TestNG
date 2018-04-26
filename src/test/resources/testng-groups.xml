@@ -10,8 +10,16 @@
                 <group name="negative" depends-on="positive"></group>
             </dependencies>
         </groups>
-        <packages>
-            <package name="lesson1" />
-        </packages>
+        <classes>
+            <class name="lesson1.Task05Test">
+                <methods>
+                    <include name="emptyFileCreateTest"></include>
+                    <include name="sameFileCreateTest"></include>
+                    <include name="anotherFileCreateTest"></include>
+                    <include name="nullFileCreateTest"></include>
+                    <include name="invalidNameFileCreateTest"></include>
+                </methods>
+            </class>
+        </classes>
     </test>
 </suite>
