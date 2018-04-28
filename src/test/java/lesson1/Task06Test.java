@@ -24,7 +24,7 @@ public class Task06Test {
     private File file;
     private File file1;
 
-    @BeforeMethod(groups = "positive")
+    @BeforeMethod
     public void setUp() throws IOException {
         tmpFolder = Files.createTempDirectory("TestNG");
     }
@@ -32,27 +32,25 @@ public class Task06Test {
     @Test(dataProvider = "loadFilesFronFile")
     public void emptyFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
-        file.createNewFile();
-        Assert.assertTrue(file.exists());
+        Assert.assertTrue(file.createNewFile());
     }
 
     @Test(dataProvider = "loadFilesFronFile")
     public void sameFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
-        file.createNewFile();
-        file.createNewFile();
-        Assert.assertTrue(file.exists());
+        SoftAssert s = new SoftAssert();
+        s.assertTrue(file.createNewFile());
+        s.assertFalse(file.createNewFile());
+        s.assertAll();
     }
 
     @Test(dataProvider = "loadFilesFronFile")
     public void anotherFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
-        file.createNewFile();
         file1 = new File(tmpFolder + "\\" + fileName + "1.txt");
-        file1.createNewFile();
         SoftAssert s = new SoftAssert();
-        s.assertTrue(file.exists());
-        s.assertTrue(file1.exists());
+        s.assertTrue(file.createNewFile());
+        s.assertTrue(file1.createNewFile());
         s.assertAll();
     }
 

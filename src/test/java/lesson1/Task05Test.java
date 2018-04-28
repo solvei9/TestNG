@@ -24,27 +24,25 @@ public class Task05Test {
     @Test(groups = "positive")
     public void emptyFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
-        file.createNewFile();
-        Assert.assertTrue(file.exists());
+        Assert.assertTrue(file.createNewFile());
     }
 
     @Test(groups = "positive")
     public void sameFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
-        file.createNewFile();
-        file.createNewFile();
-        Assert.assertTrue(file.exists());
+        SoftAssert s = new SoftAssert();
+        s.assertTrue(file.createNewFile());
+        s.assertFalse(file.createNewFile());
+        s.assertAll();
     }
 
     @Test(groups = "positive")
     public void anotherFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
-        file.createNewFile();
         file1 = new File(tmpFolder + "\\file1.txt");
-        file1.createNewFile();
         SoftAssert s = new SoftAssert();
-        s.assertTrue(file.exists());
-        s.assertTrue(file1.exists());
+        s.assertTrue(file.createNewFile());
+        s.assertTrue(file1.createNewFile());
         s.assertAll();
     }
 
@@ -52,7 +50,8 @@ public class Task05Test {
     public void nullFileCreateTest() throws IOException{
         try {
             file = null;
-            file.createNewFile();
+            boolean result = file.createNewFile();
+            Assert.fail("Exception has not received");
         }
         catch (Exception e) {
             Assert.assertEquals(e.getClass().toString(), "class java.lang.NullPointerException");
@@ -63,21 +62,21 @@ public class Task05Test {
     public void invalidNameFileCreateTest() throws IOException {
         try {
             file = new File(tmpFolder + "\\*");
-            file.createNewFile();
+            boolean result = file.createNewFile();
+            Assert.fail("Exception has not received");
         }
         catch (IOException e) {
             Assert.assertEquals(e.getMessage(), "Синтаксическая ошибка в имени файла, имени папки или метке тома");
-            Assert.assertFalse(file.exists());
         }
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() throws IOException {
-        if (!(file==null)) {
-            file.delete();
+        if (file!=null) {
+            boolean result = file.delete();
         }
-        if (!(file1==null)) {
-            file1.delete();
+        if (file1!=null) {
+            boolean result = file1.delete();
         }
         Files.delete(tmpFolder);
     }
