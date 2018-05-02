@@ -75,6 +75,7 @@ public class Task06Test {
             fileData.add( new Object[] {line});
             line = reader.readLine();
         }
+	reader.close();
         return fileData.iterator();
     }
 
