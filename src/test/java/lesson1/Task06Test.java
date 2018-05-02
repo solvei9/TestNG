@@ -29,13 +29,13 @@ public class Task06Test {
         tmpFolder = Files.createTempDirectory("TestNG");
     }
 
-    @Test(dataProvider = "loadFilesFronFile")
+    @Test(dataProvider = "loadFilesFromFile")
     public void emptyFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
         Assert.assertTrue(file.createNewFile());
     }
 
-    @Test(dataProvider = "loadFilesFronFile")
+    @Test(dataProvider = "loadFilesFromFile")
     public void sameFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
         SoftAssert s = new SoftAssert();
@@ -44,7 +44,7 @@ public class Task06Test {
         s.assertAll();
     }
 
-    @Test(dataProvider = "loadFilesFronFile")
+    @Test(dataProvider = "loadFilesFromFile")
     public void anotherFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "\\" + fileName + ".txt");
         file1 = new File(tmpFolder + "\\" + fileName + "1.txt");
@@ -66,7 +66,7 @@ public class Task06Test {
     }
 
     @DataProvider
-    public Iterator<Object[]> loadFilesFronFile() throws IOException {
+    public Iterator<Object[]> loadFilesFromFile() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 DataProvider.class.getResourceAsStream("/files.data")));
         List<Object[]> fileData = new ArrayList<Object[]>();
