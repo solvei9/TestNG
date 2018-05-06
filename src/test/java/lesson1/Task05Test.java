@@ -24,7 +24,10 @@ public class Task05Test {
     @Test(groups = "positive")
     public void emptyFileCreateTest() throws IOException {
         file = new File(tmpFolder + "\\file.txt");
-        Assert.assertTrue(file.createNewFile());
+        SoftAssert s = new SoftAssert();
+        s.assertTrue(file.createNewFile());
+        s.assertTrue(file.exists());
+        s.assertAll();
     }
 
     @Test(groups = "positive")
@@ -32,7 +35,9 @@ public class Task05Test {
         file = new File(tmpFolder + "\\file.txt");
         SoftAssert s = new SoftAssert();
         s.assertTrue(file.createNewFile());
+        s.assertTrue(file.exists());
         s.assertFalse(file.createNewFile());
+        s.assertTrue(file.exists());
         s.assertAll();
     }
 
@@ -42,7 +47,9 @@ public class Task05Test {
         file1 = new File(tmpFolder + "\\file1.txt");
         SoftAssert s = new SoftAssert();
         s.assertTrue(file.createNewFile());
+        s.assertTrue(file.exists());
         s.assertTrue(file1.createNewFile());
+        s.assertTrue(file1.exists());
         s.assertAll();
     }
 
