@@ -20,7 +20,7 @@ public class Task12Test {
     }
 
     @Test(enabled = true, dataProvider = "excelDataProvider", dataProviderClass = ExcelDataProvider.class)
-    @ExcelDataSource(source = "/data.xls")
+    @ExcelDataSource(source = "src/test/resources/files.xls")
     public void emptyFileCreateTest(String fileName) throws IOException {
         file = new File(tmpFolder + "/" + fileName + ".txt");
         Assert.assertTrue(file.createNewFile());
